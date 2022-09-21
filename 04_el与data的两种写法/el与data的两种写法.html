@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>el与data的两种写法</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        data 与 el 有2种写法
+            1. el 有2种写法
+                1) new Vue 的时候配置 el 属性
+                2) 先创建 Vue 实例, 随后再通过 vm.$mount('#root')指定 el 的值
+            2. data 有2种写法
+                1) 对象式 data: {}
+                2) 函数式 data: function() {}  或 data() {}
+                如何选择: 目前哪种写法都可以, 以后学习组件时, data 必须使用函数式, 否则会报错
+            3. 一个重要的原则:
+                由 Vue 管理的函数, 一定不要写箭头函数, 一旦写了箭头函数, this 就不再是 Vue 实例了
+     -->
+    <div id="root">
+        <h1>你好, {{name}}</h1>
+    </div>
+
+</body>
+
+    <script>
+        // el 的两种写法
+        // const v = new Vue({
+        //     // el: '#root',  // 第一种写法
+        //     data: {
+        //         name: '尚硅谷'
+        //     }
+        // });
+        // console.log(v);
+        // v.$mount('#root');  // 第二种写法
+
+        // data 的两种写法
+        new Vue({
+            el: '#root',
+            // data 的第一种写法: 对象式
+            // data: {
+            //     name: '尚硅谷'
+            // }
+
+            // data 的第二种写法: 函数式
+            data() { // 或 data: function() {
+               // 不能写成  data: ()=> { 
+            // 箭头函数的 this 指向的是window, 因此不能使用 箭头函数
+                console.log('@@@', this);
+                return {
+                    name: '尚硅谷'
+                }
+            }
+        })
+    </script>
+</html>
